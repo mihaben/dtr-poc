@@ -15,7 +15,12 @@
     });
 
   const updateElement = ({ selector, value }) => {
-    document.querySelector(selector).innerHTML = value;
+    const element = document.querySelector(selector);
+    if (element) {
+      element.innerHTML = value;
+    } else {
+      console.warn(`element ${selector} not found`);
+    }
   };
 
   const createSpinnerElement = () => {
