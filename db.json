@@ -1,12 +1,14 @@
-[
-  {
-    "id": "boda",
-    "selector": "#title",
-    "value": "Encuentra el grupo perfecto para tu boda"
-  },
-  {
-    "id": "evento",
-    "selector": "#title",
-    "value": "Tu evento es mejor con música"
-  }
-]
+{
+  "elements": [
+    {
+      "id": "demo1",
+      "selector": "#title",
+      "value": "Hello world"
+    },
+    {
+      "id": "demo2",
+      "selector": "h1",
+      "value": "Lorem Ipsum"
+    }
+  ]
+}
