@@ -5,6 +5,10 @@
     "https://my-json-server.typicode.com/mihaben/dtr-poc/elements";
   const COLOR_SPINNER = "#EFF1F2";
 
+  const printLog = msg => {
+    console.info(`-> DTR: ${msg}`);
+  };
+
   const timeout = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
@@ -17,9 +21,10 @@
   const updateElement = ({ selector, value }) => {
     const element = document.querySelector(selector);
     if (element) {
+      printLog(`'${selector}' previous value: ${element.innerHTML}`);
       element.innerHTML = value;
     } else {
-      console.warn(`DTR: Element ${selector} not found`);
+      printLog(`element '${selector}' not found`);
     }
   };
 
@@ -70,12 +75,20 @@
     return new Promise(resolve => {
       // Check if the document is ready
       if (document.readyState === "complete") {
+        printLog("document readyState is complete");
         resolve();
       }
       // Window listener
-      window.addEventListener("load", resolve);
+      window.addEventListener("load", () => {
+        printLog("window load event trigered");
+        resolve();
+      });
       // Fix: Sometimes the event is not fired.
-      timeout && setTimeout(resolve, timeout);
+      timeout &&
+        setTimeout(() => {
+          printLog(`timeout ${timeout}ms reached`);
+          resolve();
+        }, timeout);
     });
   };
 
@@ -89,20 +102,27 @@
   if (urlParams.has(QUERY_PARAM_DTR)) {
     // Only init the script if we receive ?dtr
     (async function() {
+      printLog("start");
       // Wait to the body is loaded
       const bodyElement = await onBodyLoaded();
+      printLog("body is loaded");
       // Add the spinner to the body
       addSpinner(bodyElement);
+      printLog("spinner added");
       // Fetch the config data from the user
       const configData = await fetchData(CONFIG_URL);
+      printLog("data fetched");
       // Match the config data with the query params found in the url (Now not avoid multiple values)
       const configQueryParam = getConfigQueryParam(urlParams, configData);
       // Wait to the document is ready to update the DOM
       await onDocumentReady(5000);
+      printLog("document is ready");
       // Update the DOM if is required
       configQueryParam && updateElement(configQueryParam);
+      printLog("updated elements");
       // Remove the spinner
       removeSpinner();
+      printLog("spinner removed");
     })();
   }
 })();
