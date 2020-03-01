@@ -5,12 +5,12 @@
     "https://my-json-server.typicode.com/mihaben/dtr-poc/elements";
   const COLOR_SPINNER = "#EFF1F2";
 
-  const printLog = msg => {
-    console.info(`-> DTR: ${msg}`);
-  };
-
   const timeout = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
+  };
+
+  const printLog = msg => {
+    console.info(`-> DTR: ${msg}`);
   };
 
   const fetchData = url =>
@@ -18,11 +18,32 @@
       return response.json();
     });
 
+  const freezeElement = element => {
+    const property = "innerHTML";
+    const ownObjectProto = Object.getPrototypeOf(element);
+    const ownProperty = Object.getOwnPropertyDescriptor(
+      ownObjectProto,
+      property
+    );
+
+    Object.defineProperty(element, property, {
+      get: function() {
+        return ownProperty.get.call(this);
+      },
+      set: function(val) {
+        console.warn(
+          `Blocked attempt to update a freezed element with value: ${val}`
+        );
+      }
+    });
+  };
+
   const updateElement = ({ selector, value }) => {
     const element = document.querySelector(selector);
     if (element) {
       printLog(`'${selector}' previous value: ${element.innerHTML}`);
       element.innerHTML = value;
+      freezeElement(element);
     } else {
       printLog(`element '${selector}' not found`);
     }
