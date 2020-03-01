@@ -1,0 +1,12 @@
+[
+  {
+    "id": "boda",
+    "selector": "#title",
+    "value": "Encuentra el grupo perfecto para tu boda"
+  },
+  {
+    "id": "evento",
+    "selector": "#title",
+    "value": "Tu evento es mejor con música"
+  }
+]
