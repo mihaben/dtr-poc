@@ -93,7 +93,7 @@
       // Match the config data with the query params found in the url (Now not avoid multiple values)
       const configQueryParam = getConfigQueryParam(urlParams, configData);
       // Wait to the windows is loaded to update the DOM
-      await onWindowsLoad(1500);
+      await onWindowsLoad(5000);
       // Update the DOM if is required
       configQueryParam && updateElement(configQueryParam);
       // Remove the spinner
