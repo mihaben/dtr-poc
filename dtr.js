@@ -36,11 +36,13 @@
 
     Object.defineProperty(element, property, {
       get: function() {
-        return ownProperty.get.call(this);
+        // return ownProperty.get.call(this);
+        console.warn(`Blocked attempt to get a freezed element`);
+        return element[property];
       },
       set: function(val) {
         console.warn(
-          `Blocked attempt to update a freezed element with value: ${val}`
+          `Blocked attempt to set a freezed element with value: ${val}`
         );
       }
     });
