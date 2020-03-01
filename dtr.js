@@ -19,7 +19,7 @@
     });
 
   const freezeElement = element => {
-    const property = "innerHTML";
+    /* const property = "innerHTML";
     const ownObjectProto = Object.getPrototypeOf(element);
     const ownProperty = Object.getOwnPropertyDescriptor(
       ownObjectProto,
@@ -35,7 +35,8 @@
           `Blocked attempt to update a freezed element with value: ${val}`
         );
       }
-    });
+    }); */
+    Object.freeze(element);
   };
 
   const updateElement = ({ selector, value }) => {
