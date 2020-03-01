@@ -6,9 +6,9 @@
       "value": "Hello world"
     },
     {
-      "id": "demo2",
-      "selector": "#demo2",
-      "value": "Lorem Ipsum"
+      "id": "boda",
+      "selector": "h1#title",
+      "value": "¿Estás buscando música para tu boda?"
     },
     {
       "id": "js",
