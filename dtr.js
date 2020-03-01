@@ -29,17 +29,28 @@
 
   const blockPropertyElement = (element, property) => {
     const ownObjectProto = Object.getPrototypeOf(element);
+    // exit if bad property
+    if (!element[property]) {
+      console.error(property + " is not a property of " + element.toString());
+      return;
+    }
+
+    while (!Object.getOwnPropertyDescriptor(ownObjectProto, property)) {
+      ownObjectProto = Object.getPrototypeOf(ownObjectProto);
+    }
+
     const ownProperty = Object.getOwnPropertyDescriptor(
       ownObjectProto,
       property
     );
 
     Object.defineProperty(element, property, {
+      // Create a new getter for the property
       get: function() {
-        // return ownProperty.get.call(this);
-        console.warn(`Blocked attempt to get a freezed element`);
-        return element[property];
+        console.warn(`Access getter`);
+        return ownProperty.get.call(this);
       },
+      // Create a new setter for the property
       set: function(val) {
         console.warn(
           `Blocked attempt to set a freezed element with value: ${val}`
