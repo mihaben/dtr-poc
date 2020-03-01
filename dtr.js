@@ -28,7 +28,7 @@
   };
 
   const blockPropertyElement = (element, property) => {
-    const ownObjectProto = Object.getPrototypeOf(element);
+    let ownObjectProto = Object.getPrototypeOf(element);
     // exit if bad property
     if (!element[property]) {
       console.error(property + " is not a property of " + element.toString());
@@ -39,10 +39,7 @@
       ownObjectProto = Object.getPrototypeOf(ownObjectProto);
     }
 
-    const ownProperty = Object.getOwnPropertyDescriptor(
-      ownObjectProto,
-      property
-    );
+    let ownProperty = Object.getOwnPropertyDescriptor(ownObjectProto, property);
 
     Object.defineProperty(element, property, {
       // Create a new getter for the property
