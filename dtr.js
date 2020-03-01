@@ -18,6 +18,15 @@
       return response.json();
     });
 
+  const watchElement = (element, property) => {
+    element.watch(property, function(id, oldValue, newValue) {
+      console.warn(
+        `Blocked attempt to update "${property}" of "${id}" with value: ${newValue}`
+      );
+      return oldValue;
+    });
+  };
+
   const freezeElement = element => {
     /* const property = "innerHTML";
     const ownObjectProto = Object.getPrototypeOf(element);
@@ -36,7 +45,11 @@
         );
       }
     }); */
-    Object.freeze(element);
+    /* Object.freeze(element); */
+    watchElement(element, "innerHTML");
+    watchElement(element, "innerText");
+    watchElement(element, "textContent");
+    watchElement(element, "html");
   };
 
   const updateElement = ({ selector, value }) => {
