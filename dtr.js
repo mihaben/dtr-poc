@@ -69,10 +69,7 @@
   const onDocumentReady = timeout => {
     return new Promise(resolve => {
       // Check if the document is ready
-      if (
-        document.readyState === "complete" ||
-        document.readyState === "interactive"
-      ) {
+      if (document.readyState === "complete") {
         resolve();
       }
       // Window listener
