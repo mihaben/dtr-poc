@@ -46,10 +46,10 @@
       }
     }); */
     /* Object.freeze(element); */
-    watchElement(element, "innerHTML");
+    /* watchElement(element, "innerHTML");
     watchElement(element, "innerText");
     watchElement(element, "textContent");
-    watchElement(element, "html");
+    watchElement(element, "html"); */
   };
 
   const updateElement = ({ selector, value }) => {
