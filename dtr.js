@@ -27,6 +27,25 @@
     });
   };
 
+  const blockPropertyElement = (element, property) => {
+    const ownObjectProto = Object.getPrototypeOf(element);
+    const ownProperty = Object.getOwnPropertyDescriptor(
+      ownObjectProto,
+      property
+    );
+
+    Object.defineProperty(element, property, {
+      get: function() {
+        return ownProperty.get.call(this);
+      },
+      set: function(val) {
+        console.warn(
+          `Blocked attempt to update a freezed element with value: ${val}`
+        );
+      }
+    });
+  };
+
   const freezeElement = element => {
     /* const property = "innerHTML";
     const ownObjectProto = Object.getPrototypeOf(element);
@@ -50,6 +69,10 @@
     watchElement(element, "innerText");
     watchElement(element, "textContent");
     watchElement(element, "html"); */
+    blockPropertyElement(element, "innerHTML");
+    blockPropertyElement(element, "innerText");
+    blockPropertyElement(element, "textContent");
+    blockPropertyElement(element, "html");
   };
 
   const updateElement = ({ selector, value }) => {
