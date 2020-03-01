@@ -2,13 +2,18 @@
   "elements": [
     {
       "id": "demo1",
-      "selector": "#title",
+      "selector": "#demo1",
       "value": "Hello world"
     },
     {
       "id": "demo2",
-      "selector": "h1",
+      "selector": "#demo2",
       "value": "Lorem Ipsum"
+    },
+    {
+      "id": "js",
+      "selector": "h1#title",
+      "value": "We love JS talks"
     }
   ]
 }
