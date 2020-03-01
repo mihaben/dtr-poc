@@ -3,7 +3,7 @@
   const SPINNER_ID = "dtr-spinner";
   const CONFIG_URL =
     "https://my-json-server.typicode.com/mihaben/dtr-poc/elements";
-  const COLOR_SPINNER = "#1EFF9F";
+  const COLOR_SPINNER = "#EFF1F2";
 
   const timeout = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
