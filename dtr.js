@@ -19,7 +19,7 @@
     if (element) {
       element.innerHTML = value;
     } else {
-      console.warn(`element ${selector} not found`);
+      console.warn(`DTR: Element ${selector} not found`);
     }
   };
 
@@ -66,8 +66,16 @@
     });
   };
 
-  const onWindowsLoad = timeout => {
+  const onDocumentReady = timeout => {
     return new Promise(resolve => {
+      // Check if the document is ready
+      if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+      ) {
+        resolve();
+      }
+      // Window listener
       window.addEventListener("load", resolve);
       // Fix: Sometimes the event is not fired.
       timeout && setTimeout(resolve, timeout);
@@ -92,8 +100,8 @@
       const configData = await fetchData(CONFIG_URL);
       // Match the config data with the query params found in the url (Now not avoid multiple values)
       const configQueryParam = getConfigQueryParam(urlParams, configData);
-      // Wait to the windows is loaded to update the DOM
-      await onWindowsLoad(5000);
+      // Wait to the document is ready to update the DOM
+      await onDocumentReady(5000);
       // Update the DOM if is required
       configQueryParam && updateElement(configQueryParam);
       // Remove the spinner
