@@ -44,7 +44,7 @@
     Object.defineProperty(element, property, {
       // Create a new getter for the property
       get: function() {
-        console.warn(`Access getter`);
+        console.warn(`Access getter "${property}": ${element[property]}`);
         return ownProperty.get.call(this);
       },
       // Create a new setter for the property
