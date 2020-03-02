@@ -58,6 +58,9 @@
     });
   };
 
+  const blockMethodElement = (element, method) =>
+    (element[method] = () => console.warn(`Blocked method ${method}`));
+
   const freezeElement = element => {
     /* const property = "innerHTML";
     const ownObjectProto = Object.getPrototypeOf(element);
@@ -81,12 +84,15 @@
     watchElement(element, "innerText");
     watchElement(element, "textContent");
     watchElement(element, "html"); */
+
+    // Properties
     blockPropertyElement(element, "innerHTML");
     blockPropertyElement(element, "innerText");
     blockPropertyElement(element, "textContent");
-    blockPropertyElement(element, "append");
-    blockPropertyElement(element, "appendchild");
-    blockPropertyElement(element, "push");
+    // Methods
+    blockMethodElement(element, "append");
+    blockMethodElement(element, "appendchild");
+    blockMethodElement(element, "push");
   };
 
   const updateElement = ({ selector, value }) => {
