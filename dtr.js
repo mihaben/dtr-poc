@@ -41,10 +41,12 @@
 
     let ownProperty = Object.getOwnPropertyDescriptor(ownObjectProto, property);
 
+    const value = element[property];
+
     Object.defineProperty(element, property, {
       // Create a new getter for the property
       get: function() {
-        console.warn(`Access getter "${property}": ${element[property]}`);
+        console.warn(`Access getter "${property}": ${value}`);
         return ownProperty.get.call(this);
       },
       // Create a new setter for the property
