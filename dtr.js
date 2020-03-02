@@ -82,7 +82,6 @@
     blockPropertyElement(element, "innerHTML");
     blockPropertyElement(element, "innerText");
     blockPropertyElement(element, "textContent");
-    blockPropertyElement(element, "html");
   };
 
   const updateElement = ({ selector, value }) => {
