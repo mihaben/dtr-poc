@@ -18,12 +18,13 @@
       return response.json();
     });
 
-  const watchElement = (element, property) => {
-    element.watch(property, function(id, oldValue, newValue) {
-      console.warn(
-        `Blocked attempt to update "${property}" of "${id}" with value: ${newValue}`
-      );
-      return oldValue;
+  const watchElement = element => {
+    const observer = new MutationObserver(function(mutations, me) {
+      console.warn(mutations);
+    });
+    observer.observe(element, {
+      childList: false,
+      subtree: false
     });
   };
 
@@ -100,7 +101,7 @@
     if (element) {
       printLog(`'${selector}' previous value: ${element.innerHTML}`);
       element.innerHTML = value;
-      freezeElement(element);
+      watchElement(element);
     } else {
       printLog(`element '${selector}' not found`);
     }
