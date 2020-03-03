@@ -100,8 +100,11 @@
   const updateElement = ({ selector, value }) => {
     const element = document.querySelector(selector);
     if (element) {
-      printLog(`'${selector}' previous value: ${element.innerHTML}`);
+      printLog(
+        `'${selector}' previous value: ${element.innerHTML} -> ${value}`
+      );
       element.innerHTML = value;
+      printLog(`'innerHTML has been updated to: ${element.innerHTML}`);
       watchElement(element);
     } else {
       printLog(`element '${selector}' not found`);
