@@ -23,6 +23,7 @@
       console.warn(mutations);
     });
     observer.observe(element, {
+      characterData: true,
       childList: false,
       subtree: false
     });
