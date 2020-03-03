@@ -23,9 +23,9 @@
       console.warn(mutations);
     });
     observer.observe(element, {
-      characterData: true,
-      childList: false,
-      subtree: false
+      attributes: true,
+      childList: true,
+      characterData: true
     });
   };
 
